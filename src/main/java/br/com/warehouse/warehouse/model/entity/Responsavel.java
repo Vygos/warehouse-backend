@@ -29,6 +29,9 @@ public class Responsavel {
     @JoinColumn(name = "id_cargo")
     private Cargo cargo;
 
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     public Integer getIdResponsavel() {
         return idResponsavel;
@@ -52,5 +55,29 @@ public class Responsavel {
 
     public void setDataNascimentoResponsavel(LocalDate dataNascimentoResponsavel) {
         this.dataNascimentoResponsavel = dataNascimentoResponsavel;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

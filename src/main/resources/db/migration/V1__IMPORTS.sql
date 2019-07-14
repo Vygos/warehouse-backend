@@ -19,31 +19,31 @@ create table cargo
 ) ENGINE = InnoDB
   CHARACTER SET = utf8;
 
+create table usuario
+(
+    id_usuario int           not null AUTO_INCREMENT,
+    email      varchar(100)  not null UNIQUE,
+    secret     varchar(1000) not null,
+    PRIMARY key (id_usuario)
+) ENGINE = InnoDB
+  CHARACTER SET = utf8;
+
 create table responsavel
 (
     id_responsavel              int          not null AUTO_INCREMENT,
     id_empresa                  int          not null,
     id_cargo                    int          not null,
+    id_usuario                  int          not null,
     no_responsavel              varchar(255) not null,
     data_nascimento_responsavel DATE,
 
     PRIMARY KEY (id_responsavel),
     FOREIGN KEY (id_empresa) references empresa (id_empresa),
-    FOREIGN KEY (id_cargo) references cargo (id_cargo)
+    FOREIGN KEY (id_cargo) references cargo (id_cargo),
+    FOREIGN KEY (id_usuario) references usuario(id_usuario)
 ) ENGINE = InnoDB
   CHARACTER SET = utf8;
 
-
-create table usuario
-(
-    id_usuario     int           not null AUTO_INCREMENT,
-    id_responsavel int           not null,
-    email       varchar(100)  not null UNIQUE,
-    secret         varchar(1000) not null,
-    PRIMARY key (id_usuario),
-    FOREIGN KEY (id_responsavel) REFERENCES responsavel (id_responsavel)
-) ENGINE = InnoDB
-  CHARACTER SET = utf8;
 
 create table permissao
 (
@@ -64,7 +64,7 @@ create table usuario_permissao
 
 create table setor
 (
-    id_setor int not null AUTO_INCREMENT,
+    id_setor int          not null AUTO_INCREMENT,
     ds_setor varchar(100) not null,
     PRIMARY KEY (id_setor)
 ) ENGINE = InnoDB

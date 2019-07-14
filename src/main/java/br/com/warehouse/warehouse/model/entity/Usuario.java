@@ -21,15 +21,14 @@ public class Usuario {
     @Column(name = "secret")
     private String secret;
 
-    @OneToOne
-    @JoinColumn(name = "id_responsavel")
-    private Responsavel responsavel;
-
     @ManyToMany
     @JoinTable(name = "usuario_permissao",
             joinColumns = {@JoinColumn(name = "id_usuario")},
             inverseJoinColumns = { @JoinColumn(name="id_permissao")})
     private List<Permissao> permissaoUsuario;
+
+    @OneToOne(mappedBy = "usuario")
+    private Responsavel responsavel;
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -61,5 +60,13 @@ public class Usuario {
 
     public void setResponsavel(Responsavel responsavel) {
         this.responsavel = responsavel;
+    }
+
+    public List<Permissao> getPermissaoUsuario() {
+        return permissaoUsuario;
+    }
+
+    public void setPermissaoUsuario(List<Permissao> permissaoUsuario) {
+        this.permissaoUsuario = permissaoUsuario;
     }
 }
