@@ -1,3 +1,6 @@
+
+set global time_zone = "-3:00";
+
 create table empresa
 (
     id_empresa            int          not null AUTO_INCREMENT,
