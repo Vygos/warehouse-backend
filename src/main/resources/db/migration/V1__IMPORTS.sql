@@ -77,6 +77,8 @@ create table produto
 (
     id_produto     int          not null AUTO_INCREMENT,
     no_produto     varchar(255) not null,
+    fabricante     varchar(255) not null,
+    qtde_produto   int          not null,
     codigo_produto varchar(5)   not null,
     id_setor       int          not null,
     id_empresa     int          not null,

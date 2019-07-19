@@ -16,6 +16,14 @@ public class Produto {
     private String noProduto;
 
     @NotNull
+    @Column(name = "fabricante")
+    private String fabricante;
+    
+    @NotNull
+    @Column(name = "qtde_produto")
+    private Integer qtdeProduto;
+
+    @NotNull
     @Column(name = "codigo_produto")
     private String codigoProduto;
 
@@ -44,6 +52,22 @@ public class Produto {
         this.noProduto = noProduto;
     }
 
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    public Integer getQtdeProduto() {
+        return qtdeProduto;
+    }
+
+    public void setQtdeProduto(Integer qtdeProduto) {
+        this.qtdeProduto = qtdeProduto;
+    }
+    
     public String getCodigoProduto() {
         return codigoProduto;
     }
