@@ -28,7 +28,7 @@ public class Empresa {
 
     @NotNull
     @Column(name = "telefone_empresa")
-    private String telefonEmpresa;
+    private String telefoneEmpresa;
 
     @Column(name = "email_empresa")
     private String emailEmpresa;
@@ -72,12 +72,12 @@ public class Empresa {
         this.nrCnpjEmpresa = nrCnpjEmpresa;
     }
 
-    public String getTelefonEmpresa() {
-        return telefonEmpresa;
+    public String getTelefoneEmpresa() {
+        return telefoneEmpresa;
     }
 
-    public void setTelefonEmpresa(String telefonEmpresa) {
-        this.telefonEmpresa = telefonEmpresa;
+    public void setTelefoneEmpresa(String telefonEmpresa) {
+        this.telefoneEmpresa = telefonEmpresa;
     }
 
     public String getEmailEmpresa() {
