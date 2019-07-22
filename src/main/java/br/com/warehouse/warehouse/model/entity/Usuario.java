@@ -1,5 +1,8 @@
 package br.com.warehouse.warehouse.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -18,6 +21,7 @@ public class Usuario {
     private String email;
 
     @NotNull
+    @JsonIgnore
     @Column(name = "secret")
     private String secret;
 
@@ -27,6 +31,7 @@ public class Usuario {
             inverseJoinColumns = { @JoinColumn(name="id_permissao")})
     private List<Permissao> permissaoUsuario;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "usuario")
     private Responsavel responsavel;
 

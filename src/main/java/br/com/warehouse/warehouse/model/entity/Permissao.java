@@ -1,11 +1,15 @@
 package br.com.warehouse.warehouse.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 @Table(name = "permissao")
+@JsonIgnoreProperties({"usuario"})
 public class Permissao {
 
     @Id
@@ -18,7 +22,7 @@ public class Permissao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String dsPermissao;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "usuario_permissao",
             joinColumns = {@JoinColumn(name = "id_permissao")},
             inverseJoinColumns = {@JoinColumn(name = "id_usuario")}

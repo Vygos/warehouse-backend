@@ -16,6 +16,9 @@ VALUES ('Alimentícios'),
 INSERT INTO WAREHOUSE.usuario (email, secret)
 VALUES ('admin@warehouse.com', '$2a$10$N3TDQy39c2HoxsHrwFA2Qewsh4S1Vj.r0.dKL8e8rjF8ZYgOFEieK');
 
+INSERT INTO WAREHOUSE.responsavel (id_cargo, id_usuario, no_responsavel, data_nascimento_responsavel)
+values (3, 1, 'ADMIN ADMIN', '2000-01-01');
+
 INSERT INTO WAREHOUSE.permissao (ds_permissao)
 VALUES ('ROLE_CADASTRAR'),
        ('ROLE_VISUALIZAR'),

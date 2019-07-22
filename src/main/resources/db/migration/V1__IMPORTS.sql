@@ -34,7 +34,7 @@ create table usuario
 create table responsavel
 (
     id_responsavel              int          not null AUTO_INCREMENT,
-    id_empresa                  int          not null,
+    id_empresa                  int,
     id_cargo                    int          not null,
     id_usuario                  int          not null,
     no_responsavel              varchar(255) not null,
