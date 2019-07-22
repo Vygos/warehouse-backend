@@ -19,16 +19,12 @@ public class ResponsavelService {
     private UsuarioService usuarioService;
 
     public Responsavel salvarResponsavel(Responsavel responsavel){
-        responsavel.setDataNascimentoResponsavel(LocalDate.of(1990,1,1));
-        usuarioService.salvarUsuario(responsavel.getUsuario());
+        usuarioService.encodarUsuario(responsavel.getUsuario());
         return responsavelReposity.save(responsavel);
     }
 
     public Responsavel recuperarResponsavelPorEmail(String email){
         Optional<Responsavel> responsavel = responsavelReposity.obterResponsavelLogado(email);
-        if(responsavel.isPresent()){
-            return responsavel.get();
-        }
-        return null;
+        return responsavel.orElse(null);
     }
 }

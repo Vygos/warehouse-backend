@@ -21,7 +21,6 @@ public class Usuario {
     private String email;
 
     @NotNull
-    @JsonIgnore
     @Column(name = "secret")
     private String secret;
 

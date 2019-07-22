@@ -17,7 +17,7 @@ public class UsuarioService {
     @Autowired
     private ResponsavelReposity responsavelReposity;
 
-    public void salvarUsuario(Usuario usuario){
+    public void encodarUsuario(Usuario usuario){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         usuario.setSecret(bCryptPasswordEncoder.encode(usuario.getSecret()));
     }

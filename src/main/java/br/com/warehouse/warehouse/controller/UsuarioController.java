@@ -18,8 +18,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity salvarUsuario(@Valid @RequestBody Usuario usuario){
-        System.out.println(usuario);
-        usuarioService.salvarUsuario(usuario);
+        usuarioService.encodarUsuario(usuario);
         return ResponseEntity.ok("");
     }
 }
