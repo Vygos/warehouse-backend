@@ -29,7 +29,7 @@ public class Responsavel {
     @JoinColumn(name = "id_cargo")
     private Cargo cargo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 

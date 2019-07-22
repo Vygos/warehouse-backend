@@ -1,8 +1,9 @@
 package br.com.warehouse.warehouse.controller;
 
-import br.com.warehouse.warehouse.model.entity.Produto;
-import br.com.warehouse.warehouse.service.ProdutosService;
+import br.com.warehouse.warehouse.model.entity.Responsavel;
+import br.com.warehouse.warehouse.service.ResponsavelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,17 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
-@RequestMapping("/products")
-public class ProdutosController {
+@RequestMapping("/responsavel")
+public class ResponsavelController {
 
     @Autowired
-    private ProdutosService produtosService;
+    private ResponsavelService responsavelService;
 
     @PostMapping
-    public ResponseEntity<List<Produto>> salvarProdutos(@Valid @RequestBody List<Produto> produtos){
-        return ResponseEntity.ok(produtosService.salvarProdutos(produtos));
+    public ResponseEntity<Responsavel> salvarResponsavel(@Valid @RequestBody Responsavel responsavel){
+        return new ResponseEntity<>(responsavelService.salvarResponsavel(responsavel), HttpStatus.OK);
     }
 }
