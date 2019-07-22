@@ -24,7 +24,7 @@ public class ResponsavelService {
         return responsavelReposity.save(responsavel);
     }
 
-    public Responsavel obterResponsavelLogado(String email){
+    public Responsavel recuperarResponsavelPorEmail(String email){
         Optional<Responsavel> responsavel = responsavelReposity.obterResponsavelLogado(email);
         if(responsavel.isPresent()){
             return responsavel.get();

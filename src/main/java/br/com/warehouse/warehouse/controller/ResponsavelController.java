@@ -22,7 +22,7 @@ public class ResponsavelController {
     @GetMapping
     public ResponseEntity<Responsavel> responsavelLogado(){
         String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity<>(responsavelService.obterResponsavelLogado(principal), HttpStatus.OK);
+        return new ResponseEntity<>(responsavelService.recuperarResponsavelPorEmail(principal), HttpStatus.OK);
     }
 
     @PostMapping

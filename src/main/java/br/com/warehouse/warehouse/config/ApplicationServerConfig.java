@@ -1,6 +1,8 @@
 package br.com.warehouse.warehouse.config;
 
+import br.com.warehouse.warehouse.model.entity.Responsavel;
 import br.com.warehouse.warehouse.model.entity.Usuario;
+import br.com.warehouse.warehouse.service.ResponsavelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import java.security.KeyPair;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Configuration
 public class ApplicationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -29,6 +32,9 @@ public class ApplicationServerConfig extends AuthorizationServerConfigurerAdapte
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private ResponsavelService responsavelService;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -60,9 +66,12 @@ public class ApplicationServerConfig extends AuthorizationServerConfigurerAdapte
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter(){
             @Override
             public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-                User User = (User) authentication.getPrincipal();
+                User user = (User) authentication.getPrincipal();
+                Responsavel responsavel = responsavelService.recuperarResponsavelPorEmail(user.getUsername());
                 Map<String, Object> aditionalInfo = new HashMap<>();
-                aditionalInfo.put("userName", "Victor Gabriel");
+                aditionalInfo.put("nome_responsavel", responsavel.getNoResponsavel());
+                aditionalInfo.put("empresa", responsavel.getEmpresa() != null ?
+                        responsavel.getEmpresa().getNoRazaoSocial() : null);
                 ((DefaultOAuth2AccessToken)accessToken).setAdditionalInformation(aditionalInfo);
                 accessToken = super.enhance(accessToken, authentication);
                 return accessToken;
