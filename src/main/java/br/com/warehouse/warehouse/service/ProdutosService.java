@@ -14,6 +14,6 @@ public class ProdutosService {
     private ProdutoRepository produtoRepository;
 
     public List<Produto> salvarProdutos(List<Produto> produtos){
-        return salvarProdutos(produtos);
+        return produtoRepository.saveAll(produtos);
     }
 }
