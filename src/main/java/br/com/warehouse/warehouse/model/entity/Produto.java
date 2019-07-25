@@ -2,6 +2,7 @@ package br.com.warehouse.warehouse.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "produto")
@@ -24,6 +25,7 @@ public class Produto {
     private Integer qtdeProduto;
 
     @NotNull
+    @Size(max = 5)
     @Column(name = "codigo_produto")
     private String codigoProduto;
 
@@ -82,5 +84,13 @@ public class Produto {
 
     public void setSetor(Setor setor) {
         this.setor = setor;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 }

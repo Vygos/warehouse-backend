@@ -37,7 +37,7 @@ public class Empresa {
     @Column(name = "data_fundacao_empresa")
     private LocalDate dataFundacaoEmpresa;
 
-    @OneToMany(mappedBy = "empresa")
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
     private List<Produto> produto;
 
     public Integer getIdEmpresa() {

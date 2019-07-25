@@ -21,7 +21,7 @@ public class Responsavel {
     @Column(name = "data_nascimento_responsavel")
     private LocalDate dataNascimentoResponsavel;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 
