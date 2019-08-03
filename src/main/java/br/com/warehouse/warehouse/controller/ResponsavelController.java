@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,6 +25,17 @@ public class ResponsavelController {
         return new ResponseEntity<>(responsavelService.recuperarResponsavelVinculadosEmpresa(), HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<Responsavel> salvarResponsavel(@Valid @RequestBody Responsavel responsavel){
+        return new ResponseEntity<>(responsavelService.salvarResponsavel(responsavel), HttpStatus.OK);
+    }
+
+    @PatchMapping
+    public ResponseEntity atualizarResponsavel(@RequestBody @Valid Responsavel responsavel){
+        responsavelService.atualizarResponsavel(responsavel);
+        return ResponseEntity.ok("");
+    }
+
     @GetMapping
     @RequestMapping("/logado")
     public ResponseEntity<Responsavel> responsavelLogado(){
@@ -33,8 +43,10 @@ public class ResponsavelController {
         return new ResponseEntity<>(responsavelService.recuperarResponsavelPorEmail(principal), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Responsavel> salvarResponsavel(@Valid @RequestBody Responsavel responsavel){
-        return new ResponseEntity<>(responsavelService.salvarResponsavel(responsavel), HttpStatus.OK);
+    @GetMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity<Responsavel> buscarResponsavelPorId(@PathVariable Integer id){
+        return new ResponseEntity<>(responsavelService.buscarResponsavelPorId(id), HttpStatus.OK);
     }
+
 }
