@@ -16,4 +16,8 @@ public class ProdutosService {
     public List<Produto> salvarProdutos(List<Produto> produtos){
         return produtoRepository.saveAll(produtos);
     }
+
+    public List<Produto> listarProdutos(Integer idEmpresa) {
+        return produtoRepository.listarProdutosPorIdEmpresa(idEmpresa);
+    }
 }
