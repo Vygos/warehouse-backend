@@ -27,4 +27,17 @@ public class ProdutosController {
     public ResponseEntity<List<Produto>> salvarProdutos(@Valid @RequestBody List<Produto> produtos){
         return ResponseEntity.ok(produtosService.salvarProdutos(produtos));
     }
+
+    @PatchMapping
+    public ResponseEntity atualizarProduto(@RequestBody @Valid Produto produto){
+        produtosService.atualizarProduto(produto);
+        return ResponseEntity.ok("");
+    }
+
+    @DeleteMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity deletarProduto(@PathVariable Integer id){
+        produtosService.deletarProduto(id);
+        return ResponseEntity.ok("");
+    }
 }

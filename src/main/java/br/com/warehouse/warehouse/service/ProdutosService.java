@@ -20,4 +20,12 @@ public class ProdutosService {
     public List<Produto> listarProdutos(Integer idEmpresa) {
         return produtoRepository.listarProdutosPorIdEmpresa(idEmpresa);
     }
+
+    public void atualizarProduto(Produto produto) {
+        produtoRepository.save(produto);
+    }
+
+    public void deletarProduto(Integer id) {
+        produtoRepository.deleteById(id);
+    }
 }
