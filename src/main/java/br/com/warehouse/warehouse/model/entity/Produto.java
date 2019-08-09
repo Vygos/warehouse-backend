@@ -1,5 +1,6 @@
 package br.com.warehouse.warehouse.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -8,7 +9,6 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "produto")
-@JsonIgnoreProperties("empresa")
 public class Produto {
 
     @Id
