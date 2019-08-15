@@ -1,5 +1,6 @@
 package br.com.warehouse.warehouse.service;
 
+import br.com.warehouse.warehouse.exceptionhandler.exceptions.ResponsavelNotFoundException;
 import br.com.warehouse.warehouse.model.entity.Responsavel;
 import br.com.warehouse.warehouse.repository.ResponsavelReposity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @Service
 public class ResponsavelService {
@@ -40,6 +42,6 @@ public class ResponsavelService {
     }
 
     public Responsavel buscarResponsavelPorId(Integer id) {
-        return responsavelReposity.findById(id).orElse(null);
+        return responsavelReposity.findById(id).orElseThrow(ResponsavelNotFoundException::new);
     }
 }

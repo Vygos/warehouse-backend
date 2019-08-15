@@ -1,5 +1,6 @@
 package br.com.warehouse.warehouse.controller;
 
+import br.com.warehouse.warehouse.exceptionhandler.exceptions.ResponsavelNotFoundException;
 import br.com.warehouse.warehouse.model.entity.Responsavel;
 import br.com.warehouse.warehouse.service.ResponsavelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,9 @@ public class ResponsavelController {
 
     @GetMapping
     @RequestMapping("/{id}")
-    public ResponseEntity<Responsavel> buscarResponsavelPorId(@PathVariable Integer id){
-        return new ResponseEntity<>(responsavelService.buscarResponsavelPorId(id), HttpStatus.OK);
+    public ResponseEntity buscarResponsavelPorId(@PathVariable Integer id){
+        Responsavel responsavel = responsavelService.buscarResponsavelPorId(id);
+        return ResponseEntity.status(HttpStatus.OK).body(responsavel);
     }
 
 }
