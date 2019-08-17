@@ -15,4 +15,5 @@ public interface ResponsavelReposity extends JpaRepository<Responsavel, Integer>
 
     @Query("select r from Responsavel r join r.empresa e where e.idEmpresa = :idEmpresa ")
     Optional<List<Responsavel>> recuperarResponsavelVinculadosEmpresa(@Param("idEmpresa") Integer idEmpresa);
- }
+    
+}

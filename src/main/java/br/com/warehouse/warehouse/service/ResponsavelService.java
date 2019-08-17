@@ -2,14 +2,16 @@ package br.com.warehouse.warehouse.service;
 
 import br.com.warehouse.warehouse.exceptionhandler.exceptions.ResponsavelNotFoundException;
 import br.com.warehouse.warehouse.model.entity.Responsavel;
+import br.com.warehouse.warehouse.model.vo.ResponsavelVO;
 import br.com.warehouse.warehouse.repository.ResponsavelReposity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @Service
 public class ResponsavelService {
@@ -34,14 +36,38 @@ public class ResponsavelService {
         return responsavel.orElse(null);
     }
 
-    public List<Responsavel> recuperarResponsavelVinculadosEmpresa() {
+    public List<ResponsavelVO> recuperarResponsavelVinculadosEmpresa() {
         String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer idEmpresa = recuperarResponsavelPorEmail(userName).getEmpresa().getIdEmpresa();
-        Optional<List<Responsavel>> responsavel = responsavelReposity.recuperarResponsavelVinculadosEmpresa(idEmpresa);
-        return responsavel.orElse(null);
+
+        Optional<List<Responsavel>> listaResponsavel = responsavelReposity.recuperarResponsavelVinculadosEmpresa(idEmpresa);
+        List<ResponsavelVO> responsavelVOS = new ArrayList<>();
+        listaResponsavel.ifPresent(i -> listaResponsavel.get().forEach(responsavel -> responsavelVOS.add(montarResponsavel(responsavel))));
+        return responsavelVOS;
     }
 
     public Responsavel buscarResponsavelPorId(Integer id) {
         return responsavelReposity.findById(id).orElseThrow(ResponsavelNotFoundException::new);
+    }
+
+    public List<ResponsavelVO> recuperarResponsavelPorNome(String noResponsavel) {
+        List<ResponsavelVO> listaResponsavel = recuperarResponsavelVinculadosEmpresa();
+        List<ResponsavelVO> listaResponsavelBusca =
+                listaResponsavel
+                    .stream()
+                    .filter(p -> p.getNoResponsavel().toLowerCase().contains(noResponsavel.toLowerCase()))
+                    .collect(Collectors.toList());
+
+        return listaResponsavelBusca;
+    }
+
+    public ResponsavelVO montarResponsavel(Responsavel responsavel){
+        return new ResponsavelVO
+                .ResponsavelVOBuilder()
+                .setIdResponsavel(responsavel.getIdResponsavel())
+                .setNoResponsavel(responsavel.getNoResponsavel())
+                .setEmail(responsavel.getNoResponsavel())
+                .setDataNascimento(responsavel.getDataNascimentoResponsavel())
+                .build();
     }
 }

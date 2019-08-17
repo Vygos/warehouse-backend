@@ -2,6 +2,7 @@ package br.com.warehouse.warehouse.controller;
 
 import br.com.warehouse.warehouse.exceptionhandler.exceptions.ResponsavelNotFoundException;
 import br.com.warehouse.warehouse.model.entity.Responsavel;
+import br.com.warehouse.warehouse.model.vo.ResponsavelVO;
 import br.com.warehouse.warehouse.service.ResponsavelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class ResponsavelController {
 
 
     @GetMapping
-    public ResponseEntity<List<Responsavel>> recuperarUsuariosVinculadosEmpresa(){
+    public ResponseEntity<List<ResponsavelVO>> recuperarUsuariosVinculadosEmpresa(){
         return new ResponseEntity<>(responsavelService.recuperarResponsavelVinculadosEmpresa(), HttpStatus.OK);
     }
 
@@ -49,6 +50,12 @@ public class ResponsavelController {
     public ResponseEntity buscarResponsavelPorId(@PathVariable Integer id){
         Responsavel responsavel = responsavelService.buscarResponsavelPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(responsavel);
+    }
+
+    @GetMapping
+    @RequestMapping("/buscar-nome/{nome}")
+    public ResponseEntity buscarResponsavel(@PathVariable("nome") String noResponsavel){
+        return ResponseEntity.ok(responsavelService.recuperarResponsavelPorNome(noResponsavel));
     }
 
 }

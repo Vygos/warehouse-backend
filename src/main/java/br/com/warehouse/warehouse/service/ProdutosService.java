@@ -4,6 +4,7 @@ import br.com.warehouse.warehouse.model.entity.Produto;
 import br.com.warehouse.warehouse.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import static br.com.warehouse.warehouse.util.WarehouseUtil.PORCENTO;
 
 import java.util.List;
 
@@ -27,5 +28,9 @@ public class ProdutosService {
 
     public void deletarProduto(Integer id) {
         produtoRepository.deleteById(id);
+    }
+
+    public List<Produto> buscarPorNome(String noProduto) {
+        return produtoRepository.findByNoProdutoIsLike(PORCENTO + noProduto + PORCENTO);
     }
 }
