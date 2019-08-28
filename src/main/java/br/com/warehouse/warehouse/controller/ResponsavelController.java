@@ -1,10 +1,11 @@
 package br.com.warehouse.warehouse.controller;
 
-import br.com.warehouse.warehouse.exceptionhandler.exceptions.ResponsavelNotFoundException;
 import br.com.warehouse.warehouse.model.entity.Responsavel;
 import br.com.warehouse.warehouse.model.vo.ResponsavelVO;
 import br.com.warehouse.warehouse.service.ResponsavelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/responsavel")
@@ -22,9 +24,10 @@ public class ResponsavelController {
 
 
 
-    @GetMapping
-    public ResponseEntity<List<ResponsavelVO>> recuperarUsuariosVinculadosEmpresa(){
-        return new ResponseEntity<>(responsavelService.recuperarResponsavelVinculadosEmpresa(), HttpStatus.OK);
+    @PostMapping
+    @RequestMapping("consultar")
+    public ResponseEntity<Page<ResponsavelVO>> recuperarUsuariosVinculadosEmpresa(@RequestBody Map<String, Object> filtros, Pageable pageable){
+        return new ResponseEntity<>(responsavelService.consultar(filtros,pageable), HttpStatus.OK);
     }
 
     @PostMapping
