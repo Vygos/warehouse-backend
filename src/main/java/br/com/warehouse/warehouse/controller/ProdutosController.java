@@ -24,7 +24,7 @@ public class ProdutosController {
     @PostMapping
     @RequestMapping("company/consultar")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Page<Produto>> listarProdutos(Map<String, Object> filtros, Pageable pageable){
+    public ResponseEntity<Page<Produto>> listarProdutos(@RequestBody Map<String, Object> filtros, Pageable pageable){
         return new ResponseEntity<>(produtosService.listarProdutos(filtros, pageable), HttpStatus.OK);
     }
 
